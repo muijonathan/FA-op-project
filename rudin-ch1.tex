@@ -1,0 +1,134 @@
+\begin{exercise}
+	Let $X$ be a vector space. All sets mentioned below are understood to be subsets of $X$. Prove the following statements from the axioms as given in Section 1.4.
+	\begin{enumerate}[(a)]
+		\item $2A \subseteq A+A$, and it may happen that $2A \ne A+A$.
+		\item $A$ is convex if and only if $(s+t)A = sA + tA$ for all $s,t>0$.
+		\item Every union and intersection of balanced sets is balanced.
+		\item Every intersection of convex sets is convex.
+		\item If $\Gamma$ is a collection of convex sets that is totally ordered by inclusion, then the union of all members of $\Gamma$ is convex.
+		\item If $A, B$ are convex, so is $A+B$.
+		\item If $A, B$ are balanced, so is $A+B$.
+		\item Show that (d), (e), (f) hold with subspaces in place of convex sets.
+	\end{enumerate}
+\end{exercise}
+
+\begin{proof}[Solution]
+	\begin{enumerate}[(a)]
+		\item It follows from the definition that
+		\begin{equation*}
+			2A = \{ 2a : a \in A \} = \{ a+a : a \in A \} \subseteq A+A.
+		\end{equation*}
+		Consider $X = \RR^2$, and let $A = \{ (0,0), (1,0) \}$. Then $A+A = \{ (0,0), (1,0), (2,0) \}$ but $2A = \{ (0,0), (2,0) \}$.
+		
+		\item Firstly, note that for any non-empty subset $A$, it holds that
+		\begin{equation*}
+			(s+t)A = \{ (s+t)a : a \in A \} = \{ sa + ta : a \in A \} \subseteq sA + tA
+		\end{equation*}
+		for all $s,t>0$.
+		
+		`$\Rightarrow$': Assume $C$ is convex. Then
+		\begin{equation*}
+			\frac{s}{s+t}C + \frac{t}{s+t}C \subseteq C \qquad \text{for all } s,t>0.
+		\end{equation*}
+		This is equivalent to $sC + tC \subseteq (s+t)C$. Combining with the above remark, it follows that $sC + tC = (s+t)C$.
+		
+		`$\Leftarrow$': If $(s+t)C = sC + tC$ for all $s,t>0$, then we may choose $s,t$ such that $s+t=1$. Hence $sC + tC = C$ which proves that $C$ is convex.
+		
+		\item Let $\{ B_\alpha \}_{\alpha \in I}$ be an arbitrary collection of balanced sets. Write $U = \bigcup_\alpha B_\alpha$ and $V = \bigcap_\alpha B_\alpha$. First observe that for any scalar $\lambda$, it holds that
+		\begin{equation*}
+			\lambda U = \{ \lambda x : x \in B_\alpha \text{ for some } \alpha \in I \} = \bigcup_\alpha \lambda B_\alpha
+		\end{equation*}
+		and similarly for the intersection (where `for some' is replaced by `for all'). Now suppose $|\lambda| \le 1$. Then $\lambda U = \bigcup_\alpha \lambda B_\alpha \subseteq \bigcup_\alpha B_\alpha = U$, hence $U$ is balanced. Similarly, $\lambda V = \bigcap_\alpha \lambda B_\alpha \subseteq \bigcap_\alpha B_\alpha = V$, so $V$ is balanced.
+		
+		\item Let $\{ C_\alpha \}_{\alpha\in I}$ be an arbitrary collection of convex sets, and consider $C = \bigcap_\alpha C_\alpha$. Let $x,y \in C$ and $t \in (0,1)$ be arbitrary. Since each $C_\alpha$ is convex, it follows that $(1-t)x + ty \in C_\alpha$ for every $\alpha$; whence $(1-t)x + ty \in \bigcap_\alpha C_\alpha = C$. Hence $C$ is convex.
+		
+		\item Let $\Gamma = \{C_\alpha\}_{\alpha\in J}$ be a collection of convex sets totally ordered by inclusion, and set $C = \bigcup_\alpha C_\alpha$. Let $x,y \in C$ and $t\in (0,1)$ be arbitrary. Then $x \in C_{\alpha_1}, y \in C_{\alpha_2}$ for some indices $\alpha_1, \alpha_2 \in J$. However, since $\Gamma$ is totally ordered, without loss of generality we may assume $C_{\alpha_1} \subseteq C_{\alpha_2}$. By the convexity of $C_{\alpha_2}$, it follows that $(1-t)x + ty \in C_{\alpha_2} \subseteq C$, hence $C$ is convex.
+		
+		\item Let $x,y \in A+B$ and $t \in (0,1)$ be arbitrary. Then there exist $a_i \in A, b_i \in B, i\in\{1,2\}$, such that $x=a_1+b_1$ and $y=a_2+b_2$. Then
+		\begin{align*}
+			(1-t)x+ty &= (1-t)(a_1+b_1) + t(a_2+b_2) \\
+			&= [(1-t)a_1+ta_2] + [(1-t)b_1+tb_2] \in A+B
+		\end{align*}
+		by the convexity of $A$ and $B$. Hence $A+B$ is convex.
+		
+		\item Suppose that $|\lambda| \le 1$. Then
+		\begin{align*}
+			\lambda(A+B) &= \{ \lambda(x+y) : x\in A, y\in B \} \\
+			&= \{ \lambda x + \lambda y : x\in A, y\in B\} \\
+			&= \lambda A + \lambda B \subseteq A + B
+		\end{align*}
+		since $A, B$ are balanced. This shows that $A+B$ is balanced.
+		
+		\item Obvious :)
+	\end{enumerate}
+\end{proof}
+
+\begin{remark}
+	Let $X, Y$ be topological vector spaces over the same scalar field, and suppose $T : X \to Y$ is a linear map. Here are some useful facts to keep in mind:
+	\begin{enumerate}[(i)]
+		\item If $A$ is a subspace, respectively a convex set or a balanced set in $X$, then $T(A)$ is a subspace, resp.\ convex, or balanced in $Y$.
+		\item If $B$ is a subspace, resp.\ convex or balanced in $Y$, then $T^{-1}(B)$ is a subspace, resp.\ convex or balanced in $X$.
+	\end{enumerate}
+\end{remark}
+
+\begin{exercise}
+	The \textbf{convex hull} of a set $A$ in a vector space $X$ is the set of all \textbf{convex combinations} of members of $A$, that is, the set of all sums
+	\begin{equation*}
+		t_1 x_1 + \ldots + t_n x_n
+	\end{equation*}
+	where $t_i \ge 0$ with $\sum t_i = 1$, $x_i \in A$ and $n \in \NN$ are arbitrary. Prove that the convex hull of A, denoted by $\co A$, is convex, and that it is the intersection of all convex sets containing $A$.
+\end{exercise}
+
+\begin{proof}
+	Let $x, y \in \co A$. Then $x, y$ can be expressed as convex combinations
+	\begin{equation*}
+		x = \sum_{i=1}^n t_i x_i, \qquad y = \sum_{j=1}^m s_j y_j
+	\end{equation*}
+	where $\sum t_i = \sum s_j = 1, t_i \ge 0, s_j \ge 0$ and $x_i, y_j \in A$ for all $1\le i \le n$ and $1\le j \le m$. Now let $p \in (0,1)$ be arbitrary. We can relabel the scalars $t_i, s_j$ as $\{\alpha_k\}_{1\le k \le n+m}$, and similarly we relabel the vectors $x_i, y_j$ as $\{z_k\}_{1\le k \le n+m}$. Then
+	\begin{equation*}
+		(1-p)x + py = \sum_{i=1}^n (1-p)t_i x_i + \sum_{j=1}^m ps_j y_j = \sum_{k=1}^{n+m} \alpha_k z_k,
+	\end{equation*}
+	where we observe that
+	\begin{equation*}
+		\sum_{k=1}^{n+m}\alpha_k = (1-p)\sum_{i=1}^n t_i + p\sum_{j=1}^m s_j = (1-p) + p = 1.
+	\end{equation*}
+	It follows that $(1-p)x + py \in \co A$.
+	
+	If $C$ is a convex set containing $A$, then $C$ contains all convex combinations of elements in $A$. In other words, $\co A \subseteq C$. It follows that $\co A \subseteq \bigcap C$ where the intersection is taken over all convex sets containing $A$. This intersection is clearly the smallest convex set containing $A$. Since $\co A$ is convex and contains $A$, the reverse inclusion $\bigcap C \subseteq \co A$ follows.
+\end{proof}
+
+\begin{exercise}
+	Let $X$ be a tvs. All sets mentioned below are understood to be subsets of $X$. Prove the following statements.
+	\begin{enumerate}[(a)]
+		\item The convex hull of every open set is open.
+		\item If $X$ is locally convex, then the convex hull of every bounded set is bounded. (Note that this is false without local convexity, see Rudin 1.47).
+		\item If $A$ and $B$ are bounded, so is $A+B$.
+		\item If $A$ and $B$ are compact, so is $A+B$.
+		\item If $A$ is compact and $B$ is closed, then $A+B$ is closed.
+		\item The sum of two closed sets need not be closed (in particular, the inclusion $\overline{A}+\overline{B} \subseteq \overline{A+B}$ can be strict).
+	\end{enumerate}
+\end{exercise}
+
+\begin{proof} 
+	\begin{enumerate}[(a)]
+		\item Let $U$ be an open set in $X$, and fix $x \in \co U$. Then $x$ can be written as $x = \sum_{i=1}^n t_i x_i$ for appropriate $x_i \in U$ and $t_i \ge 0, \sum t_i = 1$. Since $U$ is open, to each $x_i$ corresponds an open neighbourhood $U_i$ such that $x_i \in U_i \subset U$. It follows that
+		\begin{equation*}
+			x \in \sum_{i=1}^n t_i U_i \subseteq \co U
+		\end{equation*}
+		and moreover $\sum_{i=1}^n t_i U_i$ is open. Thus every $x \in \co U$ is an interior point, which shows that $\co U$ is open.
+		
+		\item Let $A$ be a bounded set, and fix an arbitrary neighbourhood $V$ of 0. Since $X$ is locally convex and $A$ is bounded, Theorem 1.14 shows that there exist a convex neighbourhood $W$ of 0 and $t_0>0$ such that $W \subseteq V$ and $A \subseteq tW \subseteq tV$ for all $t>t_0$. Since $tW$ is convex, consequently
+		\begin{equation*}
+			\co A \subseteq \co(tW) = tW \subseteq tV
+		\end{equation*}
+		for all $t>t_0$, which shows that $\co A$ is bounded.
+		
+		\item Let $V$ be an arbitrary neighbourhood of 0 in $X$. Since $0+0=0$ and addition is continuous, there exists a neighbourhood $W$ of 0 such that $W+W \subseteq V$. Since $A, B$ are bounded, there exists $t_0>0$ such that $A, B$ are both contained in $tW$ for all $t>t_0$. Therefore $A+B \subseteq t(W+W) \subseteq tV$ for all $t>t_0$, so $A+B$ is bounded.
+		
+		\item If $A, B$ are compact in $X$, then $A \times B$ is compact in $X \times X$. Since addition is a continuous function from $X \times X$ into $X$, it follows that $A+B$ is compact in $X$. Alternatively, we can use part (c) combined with Theorem 1.15(b) (compact sets in tvs are bounded).
+		
+		\item
+		
+		\item
+	\end{enumerate}
+\end{proof}
