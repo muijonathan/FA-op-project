@@ -1,0 +1,62 @@
+\subsection{A reminder of the separation axioms}
+\begin{definition}
+	A topological space $X$ is called
+	\begin{enumerate}[(i)]
+		\item $T_1$ if every singleton $\{x\}$ is closed; equivalently, for every pair of distinct points $x,y \in X$, there is an open set $U$ such that $x \in U$ and $y \not\in U$.
+		\item $T_2$ or \emph{Hausdorff} if for every pair of distinct points $x,y \in X$, there are disjoint open sets $U_1, U_2$ such that $x \in U_1, y \in U_2$.
+		\item \emph{regular} if for every $x \in X$ and every non-empty closed set $A \subset X$ with $x \not\in A$, there exist disjoint open sets $U_1, U_2$ such that $x \in U_1, A \subset U_2$.
+		\item $T_3$ if it is both $T_1$ and regular.
+		\item \emph{normal} if for every pair of disjoint, non-empty closed subsets $A, B \subset X$, there exist disjoint open sets $U_1, U_2$ such that $A \subset U_1, B \subset U_2$.
+		\item $T_4$ if it is both $T_1$ and normal.
+	\end{enumerate}
+\end{definition}
+
+Clearly $T_4 \Rightarrow T_3 \Rightarrow T_2 \Rightarrow T_1$. A non-empty set $X$ equipped with the trivial (a.k.a.\ indiscrete) topology $\tau = \{ \emptyset, X \}$ is normal (since the definition is satisfied vacuously) but clearly not $T_1$. \emph{Warning}: in some texts (e.g.\ Reed \& Simon), the definitions of `regular' and `normal' include the $T_1$ axiom (which has the advantage of excluding trivial examples like the indiscrete topology).
+
+\begin{proposition}
+	A topological space $X$ is regular if and only if for every $x \in X$, every open neighbourhood of $x$ contains the closure of another neighbourhood of $x$.
+\end{proposition}
+
+\begin{proof}
+	Assume that $X$ is regular, and fix $x \in X$. Let $U$ be any neighbourhood of $x$. Then $U^c$ is a closed set that does not contain $x$. By regularity, there are disjoint open sets $V, W$ such that $x \in V$ and $U^c \subset W$. Since $W^c$ is closed, it follows that $\overline{V} \subseteq \overline{W}^c = W^c \subset U$.
+	
+	Now we prove the converse. Fix $x \in X$ and let $A$ be a non-empty closed set not containing $x$. By assumption, every neighbourhood of $x$ contains the closure of another neighbourhood of $x$. Since $A^c$ is a neighbourhood of $x$, there exists another neighbourhood $U$ such that $x \in U \subset \overline{U} \subset A^c$. This implies $A \subset \overline{U}^c$, and thus $U$ and $\overline{U}^c$ are disjoint open sets containing $x$ and $A$ respectively. Thus $X$ is regular.
+\end{proof}
+
+With a very similar proof, one shows the following.
+\begin{proposition}
+	A topological space $X$ is normal if and only if every neighbourhood of a closed subset $A$ contains the closure of another neighbourhood of $A$.
+\end{proposition}
+
+\begin{proposition}
+	Let $K$ be a compact subset of a Hausdorff space. For every $x \in K^c$, there exist disjoint open subsets $U, V$ such that $x \in U$ and $K \subset V$. Consequently, every compact subset of a Hausdorff space is closed.
+\end{proposition}
+
+\begin{proof}
+	Fix $x \in K^c$. For every $y \in K$, there exist disjoint neighbourhoods $U_y$ of $y$ and $V_y$ of $x$, since $X$ is Hausdorff. Then $K$ is covered by the family $\{V_y\}_{y \in K}$, and by compactness, there exist finitely many points $y_1, \ldots, y_n$ such that $K \subseteq V := \bigcup_{i=1}^n V_{y_i}$. One verifies easily that $U := \bigcap_{i=1}^n U_{y_i}$ is an open set containing $x$ that is disjoint from $V$.
+\end{proof}
+
+Here are some other important facts.
+\begin{proposition}[Source: Reed \& Simon, IV Exercise\ 4]
+	A topological space is called \emph{Lindel\"{o}f} if every open cover has a countable subcover.
+	\begin{enumerate}[(a)]
+		\item Every second countable space is Lindel\"{o}f.
+		\item Every second countable $T_3$ space is $T_4$.
+	\end{enumerate}
+\end{proposition}
+
+\begin{proposition}
+	Every metric space is a $T_4$ space.
+\end{proposition}
+
+\begin{theorem}[Source: Rudin RCA, Theorem 2.7]
+	Suppose $U$ is an open subset of a locally compact Hausdorff space $X$. If $K \subset U$ and $K$ is compact, then there is an open set $V$ such that $K \subset V \subset \overline{V} \subset U$.
+\end{theorem}
+
+\begin{corollary}
+	Every locally compact Hausdorff space is $T_3$, and every compact Hausdorff space is $T_4$.
+\end{corollary}
+
+\subsection{Baire category theorem}
+
+\subsection{Uniform boundedness principle (Banach-Steinhaus theorem)}
