@@ -57,6 +57,16 @@ Here are some other important facts.
 	Every locally compact Hausdorff space is $T_3$, and every compact Hausdorff space is $T_4$.
 \end{corollary}
 
-\subsection{Baire category theorem}
+\subsection{Rudin Chapter 2 Exercises}
 
-\subsection{Uniform boundedness principle (Banach-Steinhaus theorem)}
+\begin{exercise}
+	If $X$ is an infinite-dimensional tvs which is the union of countably many finite-dimensional subspaces, prove that $X$ is of the first category. Hence show that no infinite dimensional $F$-space has a countable Hamel basis.
+\end{exercise}
+
+\begin{proof}[Solution]
+	Firstly, note that in any tvs $X$, if a proper non-trivial subspace $Y$ has \emph{non}-empty interior, then $Y = X$. Indeed, suppose there exists $x \in Y$ such that $x+U \subset Y$ for some open neighbourhood $U$ of 0. Since $Y$ is a subspace, $U = -x + (x+U)$ then belongs to $Y$. Consequently $nU \subset Y$ for all $n \in \NN$. However, by Proposition 1.15(a), $X = \bigcup_{n=1}^\infty nU$, hence $Y=X$ as claimed.
+	
+	Now assume that the tvs $X$ is the countable union of finite-dimensional subspaces $Y_n, n \in \NN$. Of course we may assume that $Y_n \ne \{0\}$ for all $n \in \NN$. Then each $Y_n$ is a proper non-trivial subspace of $X$. Recall from Theorem 1.21(b) that any finite-dimensional subspace of a tvs is closed. By the argument in the previous paragraph, we deduce $\text{int}(\overline{Y_n}) = \text{int}(Y_n) = \emptyset$ for all $n \in \NN$, i.e.\ each $Y_n$ is nowhere dense in $X$. This means that $X$ is of the first category.
+	
+	If $X$ has a countable Hamel basis $\{x_n\}_{n \in \NN}$, consider $Y_n := \text{span}\{x_1, \ldots, x_n\}$. Obviously each $Y_n$ is finite-dimensional, and $X = \bigcup_{n=1}^\infty Y_n$. Therefore $X$ is of the first category. Since an $F$-space is a complete metrizable tvs, it follows from the Baire category theorem that no $F$-space can have a countable Hamel basis.
+\end{proof}
