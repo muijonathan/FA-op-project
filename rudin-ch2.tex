@@ -49,6 +49,14 @@ Here are some other important facts.
 	Every metric space is a $T_4$ space.
 \end{proposition}
 
+\begin{proposition}
+	Every topological vector space $X$ is regular.
+\end{proposition}
+
+\begin{proof}
+	Let $x \in X$ be a closed set, and suppose $x \not\in C$. The proposition follows by applying Rudin Theorem 1.10 with the compact set $K = \{x\}$.
+\end{proof}
+
 \begin{theorem}[Source: Rudin RCA, Theorem 2.7]
 	Suppose $U$ is an open subset of a locally compact Hausdorff space $X$. If $K \subset U$ and $K$ is compact, then there is an open set $V$ such that $K \subset V \subset \overline{V} \subset U$.
 \end{theorem}
@@ -64,9 +72,122 @@ Here are some other important facts.
 \end{exercise}
 
 \begin{proof}[Solution]
-	Firstly, note that in any tvs $X$, if a proper non-trivial subspace $Y$ has \emph{non}-empty interior, then $Y = X$. Indeed, suppose there exists $x \in Y$ such that $x+U \subset Y$ for some open neighbourhood $U$ of 0. Since $Y$ is a subspace, $U = -x + (x+U)$ then belongs to $Y$. Consequently $nU \subset Y$ for all $n \in \NN$. However, by Proposition 1.15(a), $X = \bigcup_{n=1}^\infty nU$, hence $Y=X$ as claimed.
+	Firstly, note that in any tvs $X$, if a non-trivial subspace $Y$ has \emph{non}-empty interior, then $Y = X$. Indeed, suppose there exists $x \in Y$ such that $x+U \subset Y$ for some open neighbourhood $U$ of 0. Since $Y$ is a subspace, $U = -x + (x+U)$ then belongs to $Y$. Consequently $nU \subset Y$ for all $n \in \NN$. However, by Proposition 1.15(a), $X = \bigcup_{n=1}^\infty nU$, hence $Y=X$ as claimed.
 	
 	Now assume that the tvs $X$ is the countable union of finite-dimensional subspaces $Y_n, n \in \NN$. Of course we may assume that $Y_n \ne \{0\}$ for all $n \in \NN$. Then each $Y_n$ is a proper non-trivial subspace of $X$. Recall from Theorem 1.21(b) that any finite-dimensional subspace of a tvs is closed. By the argument in the previous paragraph, we deduce $\text{int}(\overline{Y_n}) = \text{int}(Y_n) = \emptyset$ for all $n \in \NN$, i.e.\ each $Y_n$ is nowhere dense in $X$. This means that $X$ is of the first category.
 	
 	If $X$ has a countable Hamel basis $\{x_n\}_{n \in \NN}$, consider $Y_n := \text{span}\{x_1, \ldots, x_n\}$. Obviously each $Y_n$ is finite-dimensional, and $X = \bigcup_{n=1}^\infty Y_n$. Therefore $X$ is of the first category. Since an $F$-space is a complete metrizable tvs, it follows from the Baire category theorem that no $F$-space can have a countable Hamel basis.
 \end{proof}
+
+\begin{exercise}[Rudin Ex.\ 2.4]
+	Let $L^1, L^2$ denote the usual Lebesgue spaces on the unit interval $(0,1)$. Prove that $L^2$ is of the first category in $L^1$ in three ways:
+	\begin{enumerate}[(a)]
+		\item Show that the set $\{ f\in L^1 : \int |f|^2 \le n\}$ is closed in $L^1$ but has empty interior.
+		\item Set $g_n := n \mathbf{1}_{[0, n^{-3}]}$ and show that
+		\begin{equation*}
+			\int fg_n \longrightarrow 0
+		\end{equation*}
+		as $n \to \infty$ for every $f\in L^2$, but not for every $f\in L^1$.
+		\item Note that the inclusion $L^2 \hookrightarrow L^1$ is continuous but not onto.
+	\end{enumerate}
+	Do the same exercise for $L^p, L^q$ where $p<q$.
+\end{exercise}
+
+\begin{exercise}[Rudin Ex.\ 2.5]
+	Prove results analogous to Exercise 4 for the sequence spaces $\ell^p, \ell^q$.
+\end{exercise}
+
+\begin{exercise}[Rudin Ex.\ 2.6]
+	Recall that the Fourier coefficients $\hat{f}(k)$ of a function $f \in L^2(\mathbb{T})$ are given by
+	\begin{equation*}
+		\hat{f}(k) = \frac{1}{2\pi}\int_{-\pi}^\pi f(e^{i\theta}) e^{-ik\theta} \,d\theta, \qquad k \in \ZZ.
+	\end{equation*}
+	Put
+	\begin{equation*}
+		\Lambda_n f := \sum_{k=-n}^n \hat{f}(k), \qquad n \in \NN.
+	\end{equation*}
+	Prove that $Y = \{f \in L^2(\mathbb{T}) : \lim_{n\to\infty} \Lambda_n f \text{ exists}\}$ is a dense subspace of $L^2(\mathbb{T})$ of the first category.
+\end{exercise}
+
+\begin{proof}
+	We prove the density first. Define $e_k(x) := e^{ikx}$ for every $x \in (-\pi,\pi)$ and $k \in \ZZ$. It is a standard fact in analysis that the set $\{e_k\}_{k \in \ZZ}$ forms an orthonormal basis of $L^2(\mathbb{T})$, and thus every $f \in L^2(\mathbb{T})$ has the representation
+	\begin{equation*}
+		f(x) = \sum_{k \in \ZZ} \braket{f,e_k}_{L^2} e_k(x) = \sum_{k \in \ZZ} \hat{f}(k) e^{ikx}, \qquad x \in (-\pi,\pi)
+	\end{equation*}
+	and the series converges in $L^2$. In other words, the functions $f_m$ defined by the partial sums
+	\begin{equation*}
+		f_m(x) = \sum_{k=-m}^m \hat{f}(k) e_k(x), \qquad m \in \NN
+	\end{equation*}
+	converge in $L^2(\mathbb{T})$ to $f$. Observe that for a fixed $m\in\NN$, the Fourier coefficients of $f_m$ are precisely those of $f$ when $|k|\le m$, and $\hat{f}_m(k)=0$ whenever $|k|>m$. It follows that
+	\begin{equation*}
+		\lim_{n\to \infty} \Lambda_n f_m = \sum_{k=-\infty}^\infty \hat{f}_m(k) = \sum_{k=-m}^m \hat{f}(k) < \infty
+	\end{equation*}
+	which shows that $f_m \in Y$ for all $m\in\NN$. Since $f_m \to f$ in $L^2(\mathbb{T})$, we deduce that $Y$ is a dense subspace.
+	
+	Now we prove that $Y$ is of the first category in $L^2(\mathbb{T})$. To do so, we make use of the \emph{Dirichlet kernel}
+	\begin{equation*}
+		D_n(x) := \sum_{k=-n}^n e^{ikx} = \frac{\sin ((n+\tfrac{1}{2})x)}{\sin \tfrac{x}{2}} \qquad n \in \NN, x \in (-\pi,\pi).
+	\end{equation*}
+	(note that $D_n(0) = 2n+1$). Now we observe
+	\begin{equation*}
+		\Lambda_n f = \sum_{k=-n}^n \hat{f}(k) = \frac{1}{2\pi} \int_{-\pi}^\pi f(e^{i\theta}) \sum_{k=-n}^n e^{-ik\theta} \,d\theta = \frac{1}{2\pi}\int_{-\pi}^\pi f(e^{i\theta}) D_n(\theta) \,d\theta,
+	\end{equation*}
+	i.e.\ $\Lambda_n f$ is exactly the inner product of $f$ with $D_n$. Moreover, for every $n\in \NN$, $\Lambda_n : L^2(\mathbb{T}) \to \CC$ is a bounded linear operator. Indeed, using the Cauchy-Schwarz inequality and (ii) from the Lemma below, we find
+	\begin{equation*}
+		|\Lambda_n f| \le \|f\|_2 \|D_n\|_2 = (2n+1)\|f\|_2
+	\end{equation*}
+	for all $f \in L^2(\mathbb{T})$. Since $\CC$ is complete, the set $Y$ is the same as the set of all $f \in L^2(\mathbb{T})$ for which $(\Lambda_n f)_{n\in\NN}$ is a Cauchy sequence. We now show that $Y \ne L^2(\mathbb{T})$, and then Theorem 2.7(a) will imply (by contrapositive) that $Y$ is \emph{not} of the second category, i.e.\ $Y$ is of the first category in $L^2$. By the uniform boundedness principle, it suffices to show that the family of maps $\{\Lambda_n\}_{n \in \NN}$ is not uniformly bounded. We show that there exists a bounded sequence $(g_n) \subset L^2(\mathbb{T})$ such that $|\Lambda_n g_n| \to \infty$ as $n\to\infty$. Consider the functions
+	\begin{equation*}
+		g_n(x) = \text{sgn}(D_n(x)).
+	\end{equation*}
+	(Recall the signum function $\text{sgn}(t)$ takes the value 1 when $t>0$, -1 when $t<0$ and 0 for $t=0$). Then $|g_n(x)|^2 = 1$ for almost all $x\in(-\pi,\pi)$, since each $D_n$ has only finitely many zeroes in the interval. Thus $\|g_n\|_{L^2} = 1$ for all $n\in\NN$, so $(g_n)$ is a bounded sequence. However,
+	\begin{equation*}
+		|\Lambda_n g_n| = \frac{1}{2\pi}\int_{-\pi}^\pi \text{sgn}(D_n(x))D_n(x) \,dx = \frac{1}{2\pi}\int_{-\pi}^\pi |D_n(x)|\,dx \to \infty
+	\end{equation*}
+	by (iii) in the Lemma below. Thus $\{\Lambda_n\}_{n\in\NN}$ is not uniformly bounded, and the proof is complete.
+\end{proof}
+
+\begin{lemma}[Standard facts about the Dirichlet kernel]
+	The Dirichlet kernel satisfies
+	\begin{enumerate}[\upshape (i)]
+		\item $\displaystyle\frac{1}{2\pi}\displaystyle\int_{-\pi}^{\pi} D_n(x) \,dx = 1$ for every $n\in\NN \cup \{0\}$;
+		\item $\displaystyle\frac{1}{2\pi}\displaystyle\int_{-\pi}^{\pi} |D_n(x)|^2 \,dx = 2n+1$ for every $n\in\NN \cup \{0\}$; and
+		\item $\displaystyle\frac{1}{2\pi}\displaystyle\int_{-\pi}^{\pi} |D_n(x)| \,dx \ge \frac{2}{\pi^2} \sum_{k=1}^n \frac{1}{k}$ for every $n\in\NN$.
+	\end{enumerate}
+	In particular $\|D_n\|_{L^1(\mathbb{T})} \to \infty$ and $\|D_n\|_{L^2(\mathbb{T})} \to \infty$ as $n\to\infty$.
+\end{lemma}
+
+\begin{proof}
+	(i): Fix $n \ge 0$, and recall the trigonometric identity $\sin A - \sin B = 2\sin(\tfrac{A-B}{2})\cos(\tfrac{A+B}{2})$. Then
+	\begin{equation*}
+		\sin((n+1+\tfrac{1}{2})x) - \sin((n+\tfrac{1}{2})x) = 2\sin(\tfrac{x}{2})\cos((n+1)x),
+	\end{equation*}
+	which yields
+	\begin{equation*}
+		\frac{1}{2\pi}\int_{-\pi}^\pi D_{n+1}(x) - D_n(x) \,dx = \frac{1}{2\pi}\int_{-\pi}^\pi 2 \cos((n+1)x) \,dx = 0
+	\end{equation*}
+	which implies that the integral of $D_n$ over $(-\pi,\pi)$ has the same value for all $n\ge 0$. Hence
+	\begin{equation*}
+		\frac{1}{2\pi}\int_{-\pi}^\pi D_n(x) \,dx = \frac{1}{2}\int_{-\pi}^\pi D_0(x) \,dx = 1
+	\end{equation*}
+	for all $n \ge 0$ as claimed.
+	
+	(ii): We write $\braket{\cdot, \cdot}$ for the inner product on $L^2(\mathbb{T})$. Using the orthonormality of the set $\{e_k\}_{k\in\ZZ}$ where $e_k(x) = e^{ikx}$, we obtain
+	\begin{equation*}
+		\frac{1}{2\pi}\int_{-\pi}^\pi |D_n(x)|^2 \,dx = \braket{D_n, D_n} = \sum_{k,\ell = -n}^n \braket{e_k,e_\ell} = \sum_{k,\ell=-n}^n \delta_{k\ell} = 2n+1.
+	\end{equation*}
+	
+	(iii): Recall the elementary estimate $\sin t \le t$ valid for all $t\ge 0$. Now we compute
+	\begin{align*}
+		\int_{-\pi}^\pi |D_n(x)|\,dx = 2\int_0^\pi |D_n(x)|\,dx &= 2\int_0^\pi \frac{|\sin((n+\tfrac{1}{2})x)|}{\sin(\tfrac{x}{2})} \,dx \\
+		&\ge 4\int_0^\pi \frac{|\sin((n+\tfrac{1}{2})x)|}{x} \,dx \\
+		[t = (n+\tfrac{1}{2})x] \quad &= 4\int_0^{(n+1/2)\pi} \frac{|\sin t|}{t} \,dt \\
+		&\ge 4\int_0^{n\pi} \frac{|\sin t|}{t}\,dt \\
+		&= 4\sum_{k=1}^n \frac{1}{k\pi} \int_{(k-1)\pi}^{k\pi} |\sin t|\,dt = \frac{4}{\pi} \sum_{k=1}^n \frac{1}{k}
+	\end{align*}
+	which completes the proof.
+\end{proof}
+
+\begin{remark}
+	As another application, we note that the Dirichlet kernel and the uniform boundedness principle is used to prove the following theorem due to du Bois Reymond: there exists a continuous function $f$ on $\mathbb{T}$ whose partial Fourier sums diverge at $x=0$. [Reference: Grafakos, \emph{Classical Fourier Analysis}, Section 3.4.3].
+\end{remark}
