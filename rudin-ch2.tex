@@ -93,6 +93,49 @@ Here are some other important facts.
 	Do the same exercise for $L^p, L^q$ where $p<q$.
 \end{exercise}
 
+\begin{proof}
+	(a): Let $(f_k)_{k \in \NN}$ be a sequence in $Y_n$ such that $f_k \to f$ in $L^1$. By a standard result in functional analysis, there is a subsequence, still denoted by $(f_k)$, that converges almost everywhere to $f$. Hence $|f_k|^2 \to |f|^2$ almost everywhere, and $\int |f_k|^2 \le n$. By the dominated convergence theorem, it follows that $\int |f|^2 \le n$, so $f \in Y_n$. This shows that $Y_n$ is closed in $L^1$.
+	
+	To see that $Y_n$ has empty interior, let $\varepsilon > 0$ and $f \in Y_n$ be given. Notice that the function $x^{-1/2}$ belongs to $L^1(0,1)$ but not to $L^2(0,1)$, since $1/x$ is not integrable in a neighbourhood of 0. Since
+	\begin{equation*}
+		\int_0^t \frac{1}{2\sqrt{x}} \,dx = \sqrt{t}, \qquad t \in (0,1),
+	\end{equation*}
+	we define the function
+	\begin{equation*}
+		g(x) = \begin{cases}
+			\frac{1}{2\sqrt{x}} \qquad &x \in (0, \tfrac{\varepsilon^2}{4}) \\
+			f(x) \qquad &x \in [\tfrac{\varepsilon^2}{4}, 1).
+		\end{cases}
+	\end{equation*}
+	Now fix $s > 0$ small enough such that $\int_0^s |f(x)| \,dx < \varepsilon/2$. Then for $0 < r < \min\{\varepsilon^2/4, s\}$, we have
+	\begin{align*}
+		\|g-f\|_1 &\le \|g - \mathbf{1}_{[r,1)}f\|_1 + \|\mathbf{1}_{[r,1)}f -f\|_1 \\
+		&< \int_0^r \frac{1}{2\sqrt{x}} \,dx + \int_0^r |f(x)|\,dx \\
+		&< \frac{\varepsilon}{2} + \frac{\varepsilon}{2} = \varepsilon.
+	\end{align*}
+	However $g$ does not belong to any $Y_n$, which shows that each $Y_n$ has empty interior. Finally, it is clear that $L^2(0,1) = \bigcup_{n\in\NN} Y_n$, and hence $L^2(0,1)$ is of the first category in $L^1(0,1)$.
+	
+	(b): Define the linear maps $\Lambda_n : L^1(0,1) \to \CC$ by
+	\begin{equation*}
+		\Lambda_n f := \int fg_n \,dx.
+	\end{equation*}
+	Then $|\Lambda_n f| \le \|f\|_1 \|g_n\|_\infty = n\|f\|_1$, so $\Lambda_n$ is continuous for every $n \in \NN$. Now if $f \in L^2(0,1)$, then
+	\begin{equation*}
+		|\Lambda_n f| \le \|f\|_2 \|g_n\|_2 = \frac{1}{\sqrt{n}}\|f\|_2 \longrightarrow 0
+	\end{equation*}
+	as $n \to \infty$. Thus $L^2(0,1)$ is a subspace of $C := \{ f\in L^1(0,1): \lim_{n\to\infty} \Lambda_n f \text{ exists}\}$. By Theorem 2.7, if $C$ is of second category, then $C=L^1(0,1)$. We show that this is not the case. Consider the function $f(x) = x^{-5/6}$, and note that $f \in L^1(0,1)$. However,
+	\begin{equation*}
+		\Lambda_n f = n\int_0^{1/n^3} x^{-5/6} \,dx = 6n \cdot \frac{1}{n^{1/2}} = 6\sqrt{n} \longrightarrow \infty,
+	\end{equation*}
+	so clearly $f \not\in C$. Thus $L^2$ is of the first category in $L^1$.
+	
+	(c): A simple application of Cauchy-Schwarz yields
+	\begin{equation*}
+		\int |f| \,dx = \int 1 \cdot |f| \,dx \le \|f\|_2
+	\end{equation*}
+	so the inclusion $L^2 \hookrightarrow L^1$ is continuous. However, $f(x) = x^{-1/2}$ belongs to $L^1$ but not to $L^2$, so the inclusion is not onto. It follows from the open mapping theorem that if $L^2(0,1)$ is of second category in $L^1(0,1)$, then the inclusion map would be surjective, which is false. Hence $L^2$ is of first category in $L^1$.
+\end{proof}
+
 \begin{exercise}[Rudin Ex.\ 2.5]
 	Prove results analogous to Exercise 4 for the sequence spaces $\ell^p, \ell^q$.
 \end{exercise}
@@ -140,7 +183,7 @@ Here are some other important facts.
 	\begin{equation*}
 		g_n(x) = \text{sgn}(D_n(x)).
 	\end{equation*}
-	(Recall the signum function $\text{sgn}(t)$ takes the value 1 when $t>0$, -1 when $t<0$ and 0 for $t=0$). Then $|g_n(x)|^2 = 1$ for almost all $x\in(-\pi,\pi)$, since each $D_n$ has only finitely many zeroes in the interval. Thus $\|g_n\|_{L^2} = 1$ for all $n\in\NN$, so $(g_n)$ is a bounded sequence. However,
+	(Recall the signum function $\text{sgn}(t)$ takes the value 1 when $t>0$, $-1$ when $t<0$ and 0 for $t=0$). Then $|g_n(x)|^2 = 1$ for almost all $x\in(-\pi,\pi)$, since each $D_n$ has only finitely many zeroes in the interval. Thus $\|g_n\|_{L^2} = 1$ for all $n\in\NN$, so $(g_n)$ is a bounded sequence. However,
 	\begin{equation*}
 		|\Lambda_n g_n| = \frac{1}{2\pi}\int_{-\pi}^\pi \text{sgn}(D_n(x))D_n(x) \,dx = \frac{1}{2\pi}\int_{-\pi}^\pi |D_n(x)|\,dx \to \infty
 	\end{equation*}
