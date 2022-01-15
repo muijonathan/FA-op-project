@@ -67,7 +67,7 @@ Here are some other important facts.
 
 \subsection{Rudin Chapter 2 Exercises}
 
-\begin{exercise}
+\begin{exercise}[Ex.\ 2.1]
 	If $X$ is an infinite-dimensional tvs which is the union of countably many finite-dimensional subspaces, prove that $X$ is of the first category. Hence show that no infinite dimensional $F$-space has a countable Hamel basis.
 \end{exercise}
 
@@ -79,7 +79,7 @@ Here are some other important facts.
 	If $X$ has a countable Hamel basis $\{x_n\}_{n \in \NN}$, consider $Y_n := \text{span}\{x_1, \ldots, x_n\}$. Obviously each $Y_n$ is finite-dimensional, and $X = \bigcup_{n=1}^\infty Y_n$. Therefore $X$ is of the first category. Since an $F$-space is a complete metrizable tvs, it follows from the Baire category theorem that no $F$-space can have a countable Hamel basis.
 \end{proof}
 
-\begin{exercise}[Rudin Ex.\ 2.4]
+\begin{exercise}[Ex.\ 2.4]
 	Let $L^1, L^2$ denote the usual Lebesgue spaces on the unit interval $(0,1)$. Prove that $L^2$ is of the first category in $L^1$ in three ways:
 	\begin{enumerate}[(a)]
 		\item Show that the set $\{ f\in L^1 : \int |f|^2 \le n\}$ is closed in $L^1$ but has empty interior.
@@ -136,11 +136,11 @@ Here are some other important facts.
 	so the inclusion $L^2 \hookrightarrow L^1$ is continuous. However, $f(x) = x^{-1/2}$ belongs to $L^1$ but not to $L^2$, so the inclusion is not onto. It follows from the open mapping theorem that if $L^2(0,1)$ is of second category in $L^1(0,1)$, then the inclusion map would be surjective, which is false. Hence $L^2$ is of first category in $L^1$.
 \end{proof}
 
-\begin{exercise}[Rudin Ex.\ 2.5]
+\begin{exercise}[Ex.\ 2.5]
 	Prove results analogous to Exercise 4 for the sequence spaces $\ell^p, \ell^q$.
 \end{exercise}
 
-\begin{exercise}[Rudin Ex.\ 2.6]
+\begin{exercise}[Ex.\ 2.6]
 	Recall that the Fourier coefficients $\hat{f}(k)$ of a function $f \in L^2(\mathbb{T})$ are given by
 	\begin{equation*}
 		\hat{f}(k) = \frac{1}{2\pi}\int_{-\pi}^\pi f(e^{i\theta}) e^{-ik\theta} \,d\theta, \qquad k \in \ZZ.
@@ -234,3 +234,35 @@ Here are some other important facts.
 \begin{remark}
 	As another application, we note that the Dirichlet kernel and the uniform boundedness principle is used to prove the following theorem due to du Bois Reymond: there exists a continuous function $f$ on $\mathbb{T}$ whose partial Fourier sums diverge at $x=0$. [Reference: Grafakos, \emph{Classical Fourier Analysis}, Section 3.4.3].
 \end{remark}
+
+\begin{exercise}[Ex.\ 2.13]
+Suppose $X$ is a tvs of the second category in itself. Let $K$ be a closed, convex, absorbing subset of $X$. Prove that $K$ contains a neighbourhood of 0. [\emph{Hints}: show that $H = K\cap(-K)$ is absorbing, and use the Baire category theorem to show that $H$ has interior. Then use $2H = H+H = H-H$.]
+
+Show that the result is false without convexity of $K$, even for $X = \RR^2$. Show that the result is false if $L^2(0,1)$ is topologised by the norm of $L^1(0,1)$ (see Exercise 4).
+\end{exercise}
+
+\begin{exercise}[Ex.\ 2.15]
+	Suppose $X$ is an $F$-space and $Y$ is a subspace of $X$ whose complement is of first category. Prove that $Y=X$. [\emph{Hint}: show that $Y$ intersects $x+Y$ for every $x\in X$.]
+\end{exercise}
+
+\begin{proof}[Solution]
+	Let $\{E_n\}_{n\in\NN}$ be a countable collection of nowhere dense subsets of $X$ such that $Y^c = \bigcup_{n\in\NN} E_n$. Hence
+	\begin{equation*}
+		\text{int}(Y)^c = \overline{Y^c} = \bigcup_{n\in\NN} \overline{E_n}.
+	\end{equation*}
+	Since each $\overline{E_n}^c$ is open and dense, and $X$ is a complete metric space, Baire's theorem implies that
+	\begin{equation*}
+		\text{int}(Y) = \bigcap_{n\in\NN} \overline{E_n}^c
+	\end{equation*}
+	is dense in $X$. In particular, $Y$ is dense in $X$, and so $Y \cap x + \text{int}(Y)$ is non-empty for every $x\in X$. If $x\in X$ is arbitrary, then there exists some $y \in Y \cap (x+Y)$. Then $y-x \in Y$, which readily implies $x \in Y$, as $Y$ is a subspace. This proves $Y=X$.
+\end{proof}
+
+\begin{exercise}[Ex.\ 2.16]
+	Suppose $X, K$ are metric spaces, $K$ is compact, and that the graph of $f:X\to K$ is closed in $X \times K$. Prove that $f$ is continuous. (This is an analog of the closed graph theorem, but it is much easier). Show that the compactness of $K$ cannot be omitted from the hypothesis, even when $X$ is compact.
+\end{exercise}
+
+\begin{proof}[Solution]
+	Let $(x_n)\subset X$ be a sequence such that $x_n \to x$ in $X$. Since $(f(x_n))_{n\in\NN}$ is a sequence in the compact metric space $K$, there exists a subsequence, still denoted by $(f(x_n))_{n\in\NN}$, such that $f(x_n)$ converges to some $y \in K$. Hence $(x_n, f(x_n))$ converges to $(x,y)$ in $X\times K$. Since $f$ has closed graph, this implies that $y=f(x)$, hence $f$ is continuous.
+	
+	Let $X=[0,1], K=[0, \infty)$, both equipped with the usual distance $d(x,y) = |x-y|$. Consider the map $f:X\to K$ defined by $f(x) = \frac{1}{x}$ if $x\ne 0$ and $f(0)=0$. Then $f$ has closed graph (since it is surjective), but clearly $f$ is not continuous.
+\end{proof}
