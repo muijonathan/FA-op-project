@@ -1,0 +1,64 @@
+\begin{exercise}
+	A set $H \subset \RR^n$ is called a \emph{hyperplane} if there exists a non-zero vector $a = (a_1, \ldots, a_n)$ and $c \in \RR$ such that
+	\begin{equation*}
+		H = \{ x \in \RR^n : a \cdot x = c\}.
+	\end{equation*}
+	Suppose $E$ is a convex set in $\RR^n$ with non-empty interior, and $y$ is a boundary point of $E$. Prove that there is a hyperplane $H$ such that $y\in H$ and $E$ lies entirely on one side of $H$ (make this statement precise). [\emph{Hint}: suppose $0 \in \text{int}(E)$, let $M = \text{span}\{y\}$ and then use Hahn-Banach].
+\end{exercise}
+
+\begin{exercise}
+	Consider $L^2 = L^2([-1,1])$ with Lebesgue measure. For each scalar $\alpha$, let $E_\alpha$ be the set of all continuous functions $f$ on $[-1,1]$ such that $f(0) = \alpha$. Show that each $E_\alpha$ is convex and that each is dense in $L^2$. If $\alpha \ne \beta$, show that $E_\alpha$ and $E_\beta$ are disjoint convex sets which cannot be separated by any continuous linear functional.
+\end{exercise}
+
+\begin{exercise}[Ex.\ 4]
+	Let $\ell^\infty(\NN)$ be the space of bounded real-valued functions on $\NN$ (i.e.\ sequences), and define the translation operator $\tau$ on $\ell^\infty$ by $(\tau x)(n) = x(n+1)$. Prove that there exists a linear functional $\Lambda$ on $\ell^\infty$ such that
+	\begin{enumerate}[(a)]
+		\item $\Lambda (\tau x) = \Lambda x$; and
+		\item $\displaystyle\liminf_{n\to\infty} x(n) \le \Lambda x \le \displaystyle\limsup_{n\to\infty} x(n)$
+	\end{enumerate}
+	for every $x \in \ell^\infty$. Such a linear functional is called a \emph{Banach limit}.
+	
+	[\emph{Hints}: Define
+	\begin{align*}
+		\Lambda_n x &= \frac{x(1)+\ldots+x(n)}{n} \\
+		M &= \{ x \in \ell^\infty : \lim_{n\to\infty} \Lambda_n x =: \Lambda x \text{ exists}\} \\
+		p(x) &= \limsup_{n\to\infty} \Lambda_n x
+	\end{align*}
+	and use Hahn-Banach].
+\end{exercise}
+\textcolor{red}{The definition of $p(x)$ appears to be useless, see correction below}.
+
+\begin{proof}[Solution]
+	Let $x \in M$. Firstly we verify that $\Lambda$ is translation invariant on $M$. Observe that
+	\begin{align*}
+		\Lambda_n(\tau x) &= \frac{x(2)+\ldots+x(n+1)}{n} \\
+		&= \frac{x(1)+\ldots+x(n)}{n} + \frac{x(n+1)-x(1)}{n} \\
+		&= \Lambda_n x + \frac{x(n+1)-x(1)}{n}.
+	\end{align*}
+	As $x$ is a bounded sequence, we have $[x(n+1)-x(1)]/n \to 0$ as $n\to\infty$, and thus the limit on the right hand side exists and equals $\Lambda x$. Hence $\lim_{n\to\infty} \Lambda_n (\tau x) = \Lambda x$ as well. 
+	
+	Now define
+	\begin{equation*}
+		p(x) := \limsup_{n\to\infty} x(n).
+	\end{equation*}
+	We have $p(x+y) \le p(x)+p(y)$ and $p(tx) = tp(x)$ for all $x,y \in \ell^\infty$ and $t>0$ by elementary properties of the limit superior. For $x \in M$ and for each $n\in\NN$, let $i_n \in \NN$ be such that $x(i_n) = \max_{1\le k \le n} x(k)$. Then $(i_n)_{n\in\NN}$ is a non-decreasing sequence, and
+	\begin{equation*}
+		\Lambda_n x = \frac{x(1)+\ldots+x(n)}{n} \le x(i_n) \le \sup_{k \ge i_n} x(k).
+	\end{equation*}
+	Passing to the limit, we obtain $\Lambda x \le \limsup_{n\to\infty}x(n) = p(x)$ for all $x \in M$. Thus, by the Hahn-Banach theorem, $\Lambda$ admits an extension (still denoted by $\Lambda$) to $\ell^\infty$ such that $-p(-x) \le \Lambda x \le p(x)$ for all $x \in \ell^\infty$, i.e.
+	\begin{equation*}
+		\liminf_{n\to\infty} x(n) \le \Lambda x \le \limsup_{n\to\infty} x(n),
+	\end{equation*}
+	which proves property (b). To show (a), we can apply the above inequality to $\tau x$ instead of $x$, which yields
+	\begin{equation*}
+		\liminf_{n\to\infty} (\tau x)(n) \le \Lambda(\tau x) \le \limsup_{n\to\infty} (\tau x)(n).
+	\end{equation*}
+	Since $\sup_{k \ge n} (\tau x)(k) = \sup_{k \ge n} x(k+1) \le \sup_{k \ge n}x(k)$, we find that $\Lambda (\tau x) \le \limsup_{n\to\infty} x(n)$. Hence $\Lambda(\tau x) - \Lambda x \le 0$. Similarly, by considering the lower bounds, we find that $\Lambda(\tau x) - \Lambda x \ge 0$, and by combining the two cases we conclude $\Lambda (\tau x) = \Lambda x$. This completes the proof.
+\end{proof}
+
+\begin{exercise}[Ex.\ 5(b),(c)]
+	\begin{enumerate}[(i)]
+		\item Consider the sequence space $\ell^p$ with $1 < p < \infty$. Show that $\ell^p$ contains sequences which converge weakly but not strongly.
+		\item On the other hand, prove that every weakly convergent sequence in $\ell^1$ converges strongly, despite the fact that the weak topology is different from the strong topology (induced by the norm).
+	\end{enumerate}
+\end{exercise}
