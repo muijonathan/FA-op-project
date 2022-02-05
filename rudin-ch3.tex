@@ -7,7 +7,7 @@
 \end{exercise}
 
 \begin{exercise}
-	Consider $L^2 = L^2([-1,1])$ with Lebesgue measure. For each scalar $\alpha$, let $E_\alpha$ be the set of all continuous functions $f$ on $[-1,1]$ such that $f(0) = \alpha$. Show that each $E_\alpha$ is convex and that each is dense in $L^2$. If $\alpha \ne \beta$, show that $E_\alpha$ and $E_\beta$ are disjoint convex sets which cannot be separated by any continuous linear functional.
+	Consider $L^2 = L^2([-1,1])$ with Lebesgue measure. For each scalar $\alpha$, let $E_\alpha$ be the set of all continuous functions $f$ on $[-1,1]$ such that $f(0) = \alpha$. Show that each $E_\alpha$ is convex and that each is dense in $L^2$. Hence, if $\alpha \ne \beta$, $E_\alpha$ and $E_\beta$ are disjoint convex sets which cannot be separated by any continuous linear functional $\Lambda$. [\emph{Hint}: what is $\Lambda(E_\alpha)$?].
 \end{exercise}
 
 \begin{exercise}[Ex.\ 4]
@@ -62,3 +62,32 @@
 		\item On the other hand, prove that every weakly convergent sequence in $\ell^1$ converges strongly, despite the fact that the weak topology is different from the strong topology (induced by the norm).
 	\end{enumerate}
 \end{exercise}
+
+\subsection*{Weak convergence in $\ell^1$}
+We follow Problem 8 in the functional analysis book of Br\'{e}zis.
+
+Let $E = \ell^1$, so that $E^\star = \ell^\infty$ as is well-known. Let $(x^{(n)})_{n\in\NN}$ be a sequence in $E$ that converges weakly to 0. The goal is to show that $\|x^{(n)}\|_1 \to 0$, i.e.\ the sequence in fact converges strongly.
+
+\begin{enumerate}
+	\item Given $f, g \in B_{E^\star}$, i.e.\ the unit ball in $\ell^\infty$, define
+	\begin{equation*}
+		d(f,g) := \sum_{i=1}^\infty \frac{1}{2^i}|f_i - g_i|.
+	\end{equation*}
+	Check that $d$ is a metric on $B_{E^\star}$ and that $B_{E^\star}$ is compact for the corresponding topology.
+	
+	\item Given $\varepsilon >0$, set
+	\begin{equation*}
+		F_k := \{ f \in B_{E^\star} : |f(x^{(n)})| \le \varepsilon \text{ for all } n \ge k\}.
+	\end{equation*}
+	Prove that there exists some $f^0 \in B_{E^\star}$, a constant $\rho >0$ and a $k_0 \in\NN$ such that
+	\begin{equation*}
+		f \in B_{E^\star} \text{ and } d(f,f^0) < \rho \implies f \in F_{k_0}.
+	\end{equation*}
+	[\emph{Hint}: Baire category theorem].
+	
+	\item Fix $N\in\NN$ such that $1/2^{N-1} < \rho$. Prove that
+	\begin{equation*}
+		\|x^{(n)}\|_1 \le \varepsilon + 2 \sum_{i=1}^N |x_i^{(n)}| \qquad \text{for all } n \ge k_0
+	\end{equation*}
+	and hence conclude.
+\end{enumerate}

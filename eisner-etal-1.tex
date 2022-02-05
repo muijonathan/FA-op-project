@@ -1,0 +1,149 @@
+\subsection{Exercises for chapter 1}
+
+\begin{exercise}
+	\label{exer:torus-cesaro}
+	For $\lambda \in \mathbb{T}$, prove that
+	\begin{equation*}
+		\frac{1}{n} \sum_{j=1}^n \lambda^j \text{ converges as } n \to \infty
+	\end{equation*}
+	and calculate the limit. Is the convergence uniform in $\lambda \in \mathbb{T}$?
+\end{exercise}
+
+\begin{proof}[Solution]
+	Let $S_n(\lambda) := \frac{1}{n}\sum_{j=1}^n \lambda^j$. If $\lambda=1$, then clearly $S_n(1) = 1$ for all $n\in\NN$. For $\lambda \ne 1$, we have
+	\begin{equation*}
+		|S_n(\lambda)| = \frac{|\lambda|}{n} \left|\sum_{j=0}^{n-1} \lambda^j \right| = \frac{|\lambda|}{n} \frac{|\lambda^n - 1|}{|\lambda - 1|} \le \frac{2}{n} \frac{|\lambda|}{|\lambda-1|} \longrightarrow 0
+	\end{equation*}
+	as $n\to\infty$. Hence
+	\begin{equation*}
+		\lim_{n \to \infty} S_n(\lambda) = \begin{cases}
+			0 \qquad \lambda \ne 1 \\
+			1 \qquad \lambda = 1,
+		\end{cases}
+	\end{equation*}
+	and since the limit function is discontinuous, the convergence is not uniform.
+\end{proof}
+
+\begin{exercise}
+	Prove that a convergent sequence $(a_n) \subset \CC$ with limit $a$ is \emph{Ces\`{a}ro convergent} to the same limit, i.e.\ $A_n := \frac{1}{n}\sum_{j=1}^n a_j$ converges to $a$ as $n\to\infty$.
+\end{exercise}
+
+\begin{proof}[Solution]
+	Let $\varepsilon >0$ be arbitrary. We show that there exists $N\in\NN$ such that $|A_{N+k}-a|$ can be made as small as desired for sufficiently large $k\in\NN$. Observe that
+	\begin{align*}
+		|A_{N+k}-a| = \left| \frac{1}{N+k}\sum_{j=1}^{N+k}a_j - a\right| &= \left|\frac{1}{N+k}\sum_{j=1}^N (a_j-a) + \frac{1}{N+k}\sum_{j=N+1}^{N+k}(a_j - a)\right| \\
+		&\le \frac{M_N}{N+k} + \frac{1}{N+k}\sum_{j=N+1}^{N+k}|a_j-a|,
+	\end{align*}
+	where $M_N = |\sum_{j=1}^N (a_j-a)|$. Choose $N\in\NN$ such that $|a_j-a| < \varepsilon$ for all $j \ge N$. If $k_0\in\NN$ is chosen large enough to satisfy $M_N \le (N+k_0)\varepsilon$, then
+	\begin{equation*}
+		|A_{N+k}-a| \le \frac{M_N}{N+k} + \frac{1}{N+k}\sum_{j=N+1}^{N+k}|a_j-a| \le \varepsilon + \frac{k}{N+k} \varepsilon \le 2\varepsilon
+	\end{equation*}
+	for all $k\ge k_0$. Hence $A_n \to a$ as $n\to\infty$.
+\end{proof}
+
+\begin{exercise}
+	Give an example of a non-convergent sequence in $\CC$ that is Ces\`{a}ro convergent. Give an example of a bounded sequence that is not Ces\`{a}ro convergent.
+\end{exercise}
+
+\begin{proof}[Solution]
+	The sequence $a_n = (-1)^n$ is non-convergent, but is Ces\`{a}ro convergent to 0 (this is easily verified directly, or can be seen as a special case of Exercise~\ref{exer:torus-cesaro}).
+\end{proof}
+
+\begin{exercise}
+	Let $T$ be a $d\times d$ permutation matrix. Prove that
+	\begin{equation*}
+		\frac{1}{n}\sum_{j=1}^n T^j \text{ converges as } n \to \infty
+	\end{equation*}
+	and determine the limit.
+\end{exercise}
+
+\begin{exercise}
+	Let $T$ be a $d\times d$ complex matrix. Prove that $\sup_{n\in\NN} \|T^n\| < \infty$ (i.e.\ the matrix is \emph{power-bounded}) if and only if
+	\begin{equation*}
+		A_n := \frac{1}{n}\sum_{j=1}^n T^j \text{ converges as } n\to\infty.
+	\end{equation*}
+	[\emph{Hint}: consider the Jordan normal form of $T$].
+\end{exercise}
+
+\subsection{Notes and exercises for chapter 2}
+\textbf{Convention}: in this book, a \emph{topological dynamical system} is a pair $(K;\varphi)$, where $K$ is a non-empty compact Hausdorff space, and $\varphi : K \to K$ is continuous.
+
+\begin{definition}
+	A subset $A \subseteq K$ is called \emph{invariant} if $\varphi(A) \subseteq A$, \emph{stable} if $\varphi(A) = A$, and \emph{bi-invariant} if $\varphi^{-1}(A) = A$.
+\end{definition}
+
+\begin{lemma}[Exercise 2.9]
+	Let $(K;\varphi)$ be a topological dynamical system, and let $A \subseteq K$. The following assertions hold:
+	\begin{enumerate}[\upshape (i)]
+		\item If $A$ is bi-invariant or stable, then $A$ is invariant.
+		\item If $A$ is stable and $\varphi$ injective, then $A$ is bi-invariant.
+		\item If $A$ is bi-invariant and $\varphi$ surjective, then $A$ is stable.
+	\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+	The proof essentially follows from basic facts about mappings. Let $X, Y$ be non-empty sets and $f:X \to Y$. Then
+	\begin{itemize}
+		\item For all $A \subseteq X$, $A \subseteq f^{-1}(f(A))$ with equality if and only if $f$ is injective.
+		\item For all $B \subseteq Y$, $f(f^{-1}(B)) \subseteq B$ with equality if and only if $f$ is surjective.
+	\end{itemize}
+	
+	(i): Stable trivially implies invariant. If $\varphi^{-1}(A) = A$, then $A \supseteq \varphi(\varphi^{-1}(A)) = \varphi(A)$, so $A$ is invariant.
+	
+	(ii): Since $\varphi(A)=A$ and $\varphi$ is injective, we obtain $\varphi^{-1}(A) = \varphi^{-1}(\varphi(A)) = A$.
+	
+	(iii): Since $\varphi^{-1}(A)=A$ and $\varphi$ is surjective, we obtain $\varphi(A) = \varphi(\varphi^{-1}(A)) = A$.
+\end{proof}
+
+\begin{lemma}
+	Suppose that $(K;\varphi)$ is a topological dynamical system, and $A \subseteq K$ is a non-empty, closed and invariant set. Then there is a non-empty closed set $B \subseteq A$ such that $\varphi(B)=B$, i.e.\ $B$ is stable.
+\end{lemma}
+
+\begin{proof}
+	Since $K$ is a compact Hausdorff space, $A$ is also compact. Then
+	\begin{equation*}
+		A \supseteq \varphi(A) \supseteq \varphi^2(A) \supseteq \cdots \supseteq \varphi^n(A)
+	\end{equation*}
+	holds for all $n\in\NN$, and each of these sets is non-empty and compact, since $\varphi$ is continuous. The collection of closed sets $\{\varphi^n(A)\}_{n\in\NN_0}$ has the finite intersection property, and hence, by the compactness of $K$, the set $B = \bigcap_{n\in\NN} \varphi^n(A)$ is non-empty and compact. Clearly $\varphi(B) \subseteq B$. To prove the reverse inclusion, let $x\in B$ be arbitrary. Then for each $n\in\NN$, we have $x \in \varphi^n(A)$, in other words, $\varphi^{-1}\{x\} \cap \varphi^{n-1}(A) \ne \emptyset$ for all $n\in\NN$. Therefore $\varphi^{-1}\{x\} \cap B \ne \emptyset$, i.e.\ $x\in \varphi(B)$. This completes the proof. 
+\end{proof}
+
+\begin{corollary}
+	For a topological system $(K;\varphi)$, define
+	\begin{equation*}
+		K_s := \bigcap_{n\in\NN_0} \varphi^n(K).
+	\end{equation*}
+	Then $(K_s;\varphi)$ is the unique maximal, hence largest, surjective subsystem of $(K;\varphi)$.
+\end{corollary}
+
+\begin{exercise}[Ex.\ 2.11]
+	Let $(K;\varphi)$ be a topological system. Show that:
+	\begin{enumerate}[(i)]
+		\item If $A \subseteq K$ is invariant (resp.\ stable), then $\overline{A}$ is invariant (resp.\ stable).
+		\item The intersection of arbitrarily many (bi-)invariant subsets of $K$ is again (bi-)invariant.
+		\item If $\Psi:(K;\varphi) \to (L;\psi)$ is a homomorphism of topological systems and $A \subseteq K$ is invariant (resp.\ stable), then so is $\Psi(A) \subseteq L$.
+	\end{enumerate}
+\end{exercise}
+
+\subsection{Notes and exercises for chapter 3}
+
+A topological dynamical system is \emph{minimal} if there are no non-trivial, $\varphi$-invariant closed subsets. In other words, if $A \subseteq K$ is closed and invariant, then either $A=\emptyset$ or $A=K$.
+
+\begin{proposition}[Exercise 3.4]
+	For a topological system $(K;\varphi)$, the following are equivalent:
+	\begin{enumerate}[\upshape (i)]
+		\item $(K;\varphi)$ is minimal.
+		\item $\mathrm{orb}_+(x)$ is dense in $K$ for each $x\in K$.
+		\item $K = \bigcup_{n\in\NN_0} \varphi^{-n}(U)$ for every non-empty open set $U \subseteq K$.
+	\end{enumerate}
+	In particular, every minimal system is forward transitive.
+\end{proposition}
+
+\begin{proof}
+	`(i) $\Rightarrow$ (ii)': Assume that $K$ is minimal, and choose any $x\in K$. Then $A = \overline{\mathrm{orb}_+(x)}$ is a closed, $\varphi$-invariant subset (see Exercise~\ref{exer:2-11}), so $A=K$ by minimality.
+	
+	`(ii) $\Rightarrow$ (iii)': Let $U \subseteq K$ be non-empty and open. By the continuity of $\varphi$, note that each $\varphi^{-n}(U)$ is open. Fix an arbitrary $x\in K$. By assumption, $\mathrm{orb}_+(x)$ is dense in $K$, and hence has non-empty intersection with some $\varphi^{-n}(U)$.
+	
+	`(iii) $\Rightarrow$ (i)': Assume for contradiction that there exists a non-empty, closed invariant set $A$ with $A \ne K$. Then the complement $A^c$ is a non-empty open set, and $K = \bigcup_{n\in\NN_0} \varphi^{-n}(A^c)$ by assumption. Note that $A \subseteq \varphi^{-n}(A)$ for all $n\in\NN_0$ (by invariance), and $\emptyset = \varphi^{-n}(A \cap A^c) = \varphi^{-n}(A) \cap \varphi^{-n}(A^c)$. Thus $\varphi^{-n}(A^c)$ does not intersect $A$ for all $n\in\NN_0$, and it follows that $K = \bigcup_{n\in\NN_0} \varphi^{-n}(A^c)$ does not intersect $A$, an absurdity.
+	
+	\emph{Remark}: note that compactness of $K$ was not used in the proof.
+\end{proof}
