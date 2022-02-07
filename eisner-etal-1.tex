@@ -124,11 +124,29 @@
 	\end{enumerate}
 \end{exercise}
 
+\begin{proof}
+	(i): If $A$ is invariant, then $\overline{\varphi(A)} \subseteq \bar{A}$. By continuity of $\varphi$, the set $\varphi^{-1}(\overline{\varphi(A)})$ is closed and clearly contains $A$. Hence $\bar{A} \subseteq \varphi^{-1}(\overline{\varphi(A)})$, which implies $\varphi(\bar{A}) \subseteq \overline{\varphi(A)} \subseteq \bar{A}$.
+	
+	Now assume $A$ is stable, i.e.\ $\varphi(A)=A$.  Since $K$ is a compact Hausdorff space, every continuous map on $K$ maps closed sets to closed sets. Thus $\varphi(\bar{A})$ is a closed set containing $\varphi(A)=A$, which implies $\overline{\varphi(A)} \subseteq \varphi(\bar{A})$. However, by the above argument, the reverse inclusion also holds, hence $\varphi(\bar{A}) = \bar{A}$.
+	
+	(ii): This is an immediate consequence of the following general fact: for any mapping $f:K \to K$ and any collection of subsets $\{A_i\}_{i \in I}$ of $K$, it holds that $f^{-1}(\bigcap_{i\in I} A_i) = \bigcap_{i\in I} f^{-1}(A_i)$ and $f(\bigcap_{i\in I} A_i) = \bigcap_{i\in I} f(A_i)$.
+	
+	(iii): We have $\psi \circ \Psi = \Psi \circ \varphi$. If $A \subseteq K$ is invariant (resp.\ stable), then $\psi(\Psi(A)) = \Psi(\varphi(A)) \subseteq \Psi(A)$, respectively $=\Psi(A)$.
+\end{proof}
+
 \subsection{Notes and exercises for chapter 3}
 
 A topological dynamical system is \emph{minimal} if there are no non-trivial, $\varphi$-invariant closed subsets. In other words, if $A \subseteq K$ is closed and invariant, then either $A=\emptyset$ or $A=K$.
 
-\begin{proposition}[Exercise 3.4]
+\begin{exercise}[Exercise 3.1]
+	Prove that a minimal subsystem of an invertible topological system is itself invertible.
+\end{exercise}
+
+\begin{proof}
+	We show that $\varphi^{-1}(A) = A$. Since $\varphi$ is injective, by Lemma~\ref{lem:invariant-stable}(ii) it suffices to show that $A$ is stable under $\varphi$. By Lemma~\ref{lem:stable-subset}, $A$ contains a non-empty, closed, stable subset $B$. However, if $B$ is a strict subset of $A$, this would contradict the minimality of $A$. Hence $B=A$ is stable.
+\end{proof}
+
+\begin{proposition}[Proposition 3.3 / Exercise 3.4]
 	For a topological system $(K;\varphi)$, the following are equivalent:
 	\begin{enumerate}[\upshape (i)]
 		\item $(K;\varphi)$ is minimal.
@@ -146,4 +164,15 @@ A topological dynamical system is \emph{minimal} if there are no non-trivial, $\
 	`(iii) $\Rightarrow$ (i)': Assume for contradiction that there exists a non-empty, closed invariant set $A$ with $A \ne K$. Then the complement $A^c$ is a non-empty open set, and $K = \bigcup_{n\in\NN_0} \varphi^{-n}(A^c)$ by assumption. Note that $A \subseteq \varphi^{-n}(A)$ for all $n\in\NN_0$ (by invariance), and $\emptyset = \varphi^{-n}(A \cap A^c) = \varphi^{-n}(A) \cap \varphi^{-n}(A^c)$. Thus $\varphi^{-n}(A^c)$ does not intersect $A$ for all $n\in\NN_0$, and it follows that $K = \bigcup_{n\in\NN_0} \varphi^{-n}(A^c)$ does not intersect $A$, an absurdity.
 	
 	\emph{Remark}: note that compactness of $K$ was not used in the proof.
+\end{proof}
+
+\begin{exercise}[Exercise 3.6]
+	Let $x_0$ be a recurrent point of $(K;\varphi)$. Show that $x_0$ is \emph{infinitely recurrent}, i.e.\ for every neighbourhood $U$ of $x_0$, one has
+	\begin{equation*}
+		x_0 \in \limsup_n \varphi^{-n}(U) := \bigcap_{n\in\NN} \bigcup_{m\ge n} \varphi^{-m}(U).
+	\end{equation*}
+\end{exercise}
+
+\begin{proof}
+	Fix a neighbourhood $U$ of $x_0$. Since $x_0$ is recurrent, there exists $n_0\in\NN$ such that $\varphi^{n_0}(x_0) \in U$, or equivalently $x_0 \in \varphi^{-n_0}(U)$. Since $\varphi$ is continuous, $\varphi^{-n_0}(U)$ is a neighbourhood of $x_0$ as well. Hence there exists $m_0 \in \NN$ such that $\varphi^{m_0}(x_0) \in \varphi^{-n_0}(U)$, i.e.\ $x_0 \in \varphi^{-n_1}(U)$ where $n_1 := n_0+m_0$. Proceeding in this way, we obtain a strictly increasing sequence $(n_k)_{k\in\NN}$ of positive integers such that $x_0 \in \varphi^{-n_k}(U)$ for all $k\in\NN$. Thus $x_0$ belongs to infinitely many $\varphi^{-n}(U)$.
 \end{proof}
