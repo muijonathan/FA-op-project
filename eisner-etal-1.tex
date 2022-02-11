@@ -176,3 +176,113 @@ A topological dynamical system is \emph{minimal} if there are no non-trivial, $\
 \begin{proof}
 	Fix a neighbourhood $U$ of $x_0$. Since $x_0$ is recurrent, there exists $n_0\in\NN$ such that $\varphi^{n_0}(x_0) \in U$, or equivalently $x_0 \in \varphi^{-n_0}(U)$. Since $\varphi$ is continuous, $\varphi^{-n_0}(U)$ is a neighbourhood of $x_0$ as well. Hence there exists $m_0 \in \NN$ such that $\varphi^{m_0}(x_0) \in \varphi^{-n_0}(U)$, i.e.\ $x_0 \in \varphi^{-n_1}(U)$ where $n_1 := n_0+m_0$. Proceeding in this way, we obtain a strictly increasing sequence $(n_k)_{k\in\NN}$ of positive integers such that $x_0 \in \varphi^{-n_k}(U)$ for all $k\in\NN$. Thus $x_0$ belongs to infinitely many $\varphi^{-n}(U)$.
 \end{proof}
+
+\subsection{Notes and exercises for chapter 4}
+
+We combine Theorem 4.8 in [Eisner et al.] with Proposition 2.1.9 in [Meyer-Nieberg] to show that the notions of \emph{algebraic ideal} and \emph{order ideal} coincide in $C(K)$, which is a Banach lattice as well as a (commutative, unital) $C^*$-algebra.
+
+\begin{theorem}[Characterisation of ideals in $C(K)$]
+	For every closed subspace $J$ of $C(K)$, the following assertions are equivalent:
+	\begin{enumerate}[\upshape (i)]
+		\item $J$ is an \emph{algebraic ideal}, i.e.\ if $f \in J$, then $fg \in J$ for all $g \in C(K)$.
+		\item $J$ is an \emph{order ideal}, i.e.\ if $f \in J$ and $|g| \le |f|$, then $g \in J$.
+		\item There is a closed subset $F \subseteq K$ such that
+		\begin{equation}
+			J = J_F := \{ f\in C(K) : f = 0 \text{ on } F\}.
+		\end{equation}
+	\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+	`(iii) $\Rightarrow$ (i)' :  This is obvious.
+	
+	`(i) $\Rightarrow$ (ii)': Let $f\in J$, and suppose $g \in C(K)$ satisfies $|g| \le |f|$. For every $\varepsilon >0$, it follows from Urysohn's lemma that there exists $h \in C(K)$ such that $0 \le h \le 1$, $h=0$ on $[|f| \le \varepsilon/2]$ and $h=1$ on $[|f| \ge \varepsilon]$. In particular, the support of $h$ is contained in $[|f| \ge \varepsilon/2]$. Therefore the function
+	\begin{equation*}
+		g_0 := \frac{gh}{f}
+	\end{equation*}
+	is well-defined, and $gh = g_0f \in J$. Consequently
+	\begin{align*}
+		|g(x)-g_0(x) f(x)| &= |g(x)[h(x)+(1-h(x))]-g_0(x) f(x)| \\
+		&= |g(x)(1-h(x))| \le |f(x)(1-h(x))| \le \varepsilon
+	\end{align*}
+	for all $x\in K$. This shows that $g$ may be approximated arbitrarily well by elements in $J$, and because $J$ is closed, we conclude that $g\in J$.
+	
+	`(ii) $\Rightarrow$ (iii)': Define the set
+	\begin{equation*}
+		F := \bigcap_{f\in J} [f=0] = \{x\in K : f(x)=0 \text{ for all } f\in J\}.
+	\end{equation*}
+	Clearly $F$ is closed, and $J \subseteq J_F$. To prove that $J_F \subseteq J$, fix $f\in J_F$ and $\varepsilon >0$, and define $F_\varepsilon := [|f| \ge \varepsilon]$. Since $f$ is continuous and vanishes on $F$, $F_\varepsilon$ is a closed subset of $K \setminus F$ (and compact in $K$). Hence for each $x\in F_\varepsilon$, we can find a function $f_x \in J$ such that $f_x(x) \ne 0$. Upon multiplying by $\overline{f_x}$ and a positive constant, we may assume $f_x \ge 0$ and $f_x(x)>1$. Then the collection of open sets $([f_x > 1])_{x\in F_\varepsilon}$ covers $F_\varepsilon$. By compactness of $F_\varepsilon$, there are consequently $0 \le f_1, \ldots, f_k \in J$ such that
+	\begin{equation*}
+		F_\varepsilon \subseteq \bigcup_{j=1}^k [f_j > 1].
+	\end{equation*}
+	Let $g := f_1+\ldots +f_k \in J$. Then $g \ge 0$, and $F_\varepsilon \subseteq [g \ge 1]$. Define
+	\begin{equation*}
+		g_n := \frac{nf}{1+ng}g \in J \qquad (n\in\NN).
+	\end{equation*}
+	Noting that $g \ge 1$ on $F_\varepsilon$ and $|f|<\varepsilon$ on $K \setminus F_\varepsilon$, we find that
+	\begin{equation*}
+		|g_n - f| = \frac{|f|}{1+ng} \le \max\left\{ \varepsilon, \frac{\|f\|_\infty}{1+n} \right\} \le \varepsilon
+	\end{equation*}
+	for all sufficiently large $n\in\NN$. Since $J$ is closed, we conclude that $f\in J$.
+\end{proof}
+
+The above Theorem shows that closed ideals of $C(K)$ are in one-to-one correspondence with closed subsets of $K$. If $V \subseteq W$ are closed subsets of $K$, then $J_V \supseteq J_W$. This allows us to identify maximal ideals easily. Recall that the Dirac functional $\delta_x$ at $x$ is defined by evaluation, $\braket{\delta_x, f} := f(x)$.
+\begin{corollary}[Maximal ideals in $C(K)$]
+	An ideal $J$ in $C(K)$ is maximal if and only if $J = J_{\{x\}}$ for some $x\in K$; equivalently, $J = \ker(\delta_x)$, where $\delta_x$ is the Dirac functional at $x$.
+\end{corollary}
+
+\begin{proof}
+	It is clear that any ideal of the form $J_{\{x\}}$ must be maximal. Indeed, if $I$ is an ideal strictly larger than $J_{\{x\}}$, then $I$ contains the constant function $\mathbf{1}$, and thus $I = C(K)$.
+	
+	Conversely, let $J$ be a maximal ideal. Since the closure of an ideal is again an ideal, either $\overline{J} = J$ (so $J$ is closed), or $\overline{J} = C(K)$ (i.e.\ $J$ is dense in $C(K)$). In the latter case, there exists $f \in J$ such that $\|f-\mathbf{1}\| < 1$. Then $f = \mathbf{1}-(\mathbf{1}-f)$ is bounded away from 0, and thus $1/f \in C(K)$. However this implies $f \cdot (1/f) = \mathbf{1} \in J$, hence $J = C(K)$, contradicting the maximality of $J$. Thus $J$ is a closed ideal, and Theorem~\ref{thm:CK-ideal}(iii) and the remarks preceding the corollary show that $J = J_{\{x\}}$ for some $x\in K$.
+\end{proof}
+
+For the next result, we will use the following elementary fact from functional analysis: if $X,Y$ are Banach spaces and $T:X\to Y$ is a bounded linear operator, then $T$ is surjective if and only if $T':Y'\to X'$ is injective. Indeed, suppose that $T$ is surjective, and take $y'\in \ker T' \subset Y'$. Then
+\begin{equation*}
+	0 = \braket{T'y',x} = \braket{y',Tx} = \braket{y',y}
+\end{equation*}
+for all $y\in Y$. Thus $y'=0$, showing that $T'$ is injective. Conversely, if $T$ is not surjective, then $T(X)$ is a proper closed subspace of $Y$. By the Hahn-Banach theorem, there exists a non-zero functional $y'$ such that $\braket{y',Tx} = \braket{T'y',x}=0$ for all $x\in X$. In other words, $T'y'=0$, so $T'$ is not injective.
+
+\begin{lemma}[Lemma 4.14 / Exercise 4.1]
+	Let $K, L$ be compact Hausdorff spaces. Let $\varphi:L\to K$ be a continuous map, and $T_\varphi$ its associated Koopman operator $T_\varphi: C(K)\to C(L)$ defined by $T_\varphi f := f \circ \varphi$. Then
+	\begin{enumerate}[\upshape (i)]
+		\item $\varphi$ is surjective if and only if $T_\varphi$ is injective. In this case, $T_\varphi$ is an isometry.
+		\item $\varphi$ is injective if and only if $T_\varphi$ is surjective.
+	\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+	Let us write $T := T_\varphi$.
+	
+	(i): Assume that $\varphi$ is surjective and $Tf = 0$. Then $(f\circ\varphi)(x)=0$ for all $x\in L$. However, for all $y\in K$, there exists $x\in L$ with $\varphi(x)=y$. Hence $f(y)=0$ for all $y\in K$, which shows that $\ker T = \{0\}$. Hence $T$ is injective.
+	
+	Conversely, if $\varphi$ is not surjective, then $\varphi(L)$ is a proper closed subset of $K$. For each $y\in K \setminus \varphi(L)$, Urysohn's lemma gives a continuous function $f$ such that $0 \le f \le 1$, $f=0$ on $\varphi(L)$ and $f(y)=1$. For this $f$, we have $(Tf)(x) = (f\circ\varphi)(x) = 0$ for all $x\in L$, i.e.\ $f \in \ker T$ and $f \not\equiv 0$. Thus $T$ is not injective.
+	
+	For every $f \in C(K)$, it is clear that $\|Tf\|_\infty \le \|f\|_\infty$. Since $f$ is continuous on a compact set, the maximum of $|f|$ is attained at some $y_0\in K$, and by surjectivity of $\varphi$, there exists $x_0\in L$ with $\varphi(x_0)=y_0$. Hence $|(Tf)(x_0)| = |(f\circ\varphi)(x_0)| = |f(y_0)| = \|f\|_\infty$, which proves that $\|Tf\|_\infty = \|f\|_\infty$, i.e.\ $T$ is an isometry.
+	
+	(ii): (ii): This is a `dual' statement to (i). Suppose $T$ is surjective, so $T'$ is injective by the remarks preceding the lemma. Suppose that $\varphi(x)=\varphi(y)$ for some $x,y \in L$. Then $(f\circ\varphi)(x)=(f\circ\varphi)(y)$ for all $f\in C(K)$, which can be rewritten as
+	\begin{equation*}
+		\braket{T'\delta_x,f} = \braket{T'\delta_y,f} \qquad \text{for all } f \in C(K).
+	\end{equation*}
+	Thus $\delta_x = \delta_y$ by the injectivity of $T'$, or equivalently $x=y$. Hence $\varphi$ is injective.
+	
+	Conversely, suppose $\varphi$ is injective, and let $\mu\in\ker T' \subset C(L)'$. If $x\ne y$, then $\varphi(x)\ne \varphi(y)$ by injectivity. By Urysohn's lemma, there exists $f\in C(K)$ such that $0\le f\le 1$, $(Tf)(y)=(f\circ\varphi)(y)=0$ and $(Tf)(x)=(f\circ\varphi)(x)=1$. However $\braket{T'\mu, f} = 0$, which is possible only if $\mu=0$. Hence $T'$ is injective, or equivalently $T$ is surjective.
+\end{proof}
+
+\begin{remark}
+	It is worth looking more closely at the implication $\delta_x = \delta_y \Rightarrow x=y$. If $x\ne y$, then by Urysohn's lemma we can separate $x$ from $y$ by a continuous function $f$. For this $f$, we clearly have $\braket{\delta_x,f} \ne \braket{\delta_y,f}$, so that $\delta_x$ and $\delta_y$ are distinct linear functionals.
+\end{remark}
+
+\begin{remark}
+	By associating each compact Hausdorff space $K$ with $C(K)$ together with the mapping $\varphi \mapsto T_\varphi$, we obtain a \emph{contravariant functor} from the category of compact Hausdorff spaces $\mathbf{CHaus}$ to the category of $C^*$-algebras. Let us verify this in detail:
+	\begin{itemize}
+		\item If $\varphi:L \to L$ is the identity map on $L$, then $(T_\varphi f)(x) = f(x)$ for all $x\in L$, hence $T_\varphi$ is the identity map $f \mapsto f$ on $C(L)$.
+		\item If $L,K \in \mathbf{CHaus}$ and $\varphi:L \to K$ is a continuous map, then $T_\varphi : C(K) \to C(L)$ is a $^*$-homomorphism. Indeed, it is clearly an algebra homomorphism, since if $f,g \in C(K)$, then $T_\varphi(fg) = (fg)\circ \varphi = (f\circ\varphi)(g\circ\varphi) = T_\varphi f \cdot T_\varphi g$. The involution on $C(K)$ is given by complex conjugation, and we note that $(T_{\varphi}\bar{f})(x) = (\bar{f}\circ\varphi)(x) = \overline{f(\varphi(x))}$ for all $x\in K$, which shows that $T_\varphi \bar{f} = \overline{T_\varphi f}$. Thus $T_\varphi$ is a $^*$-homomorphism as claimed.
+		\item If $K,L,M \in \mathbf{CHaus}$ and $\varphi:K \to L$ and $\psi:L \to M$ are continuous, then $T_{\psi\circ\varphi}:C(M) \to C(K)$ satisfies
+		\begin{equation*}
+			T_{\psi \circ \varphi}f = f\circ\psi\circ\varphi = T_\varphi(f\circ\psi) = (T_\varphi \circ T_\psi)f
+		\end{equation*}
+		for all $f\in C(M)$.
+	\end{itemize}
+	Thus we have verified all the properties of a contravariant functor.
+\end{remark}
