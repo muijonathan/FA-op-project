@@ -134,6 +134,45 @@
 	(iii): We have $\psi \circ \Psi = \Psi \circ \varphi$. If $A \subseteq K$ is invariant (resp.\ stable), then $\psi(\Psi(A)) = \Psi(\varphi(A)) \subseteq \Psi(A)$, respectively $=\Psi(A)$.
 \end{proof}
 
+\begin{definition}
+	A point $x\in K$ is called \emph{forward transitive} if its forward orbit
+	\begin{equation*}
+		\mathrm{orb}_+(x) := \{\varphi^n(x) : n\in\NN_0\}
+	\end{equation*}
+	is dense in $K$. The system $(K;\varphi)$ is called \emph{(topologically) forward transitive} if there is at least one forward transitive point in $K$.
+	
+	Similarly, if $(K;\varphi)$ is an invertible system, a point $x\in K$ is called \emph{transitive} if its (total) orbit
+	\begin{equation*}
+		\mathrm{orb}(x) := \{\varphi^n(x) : n\in\ZZ\}
+	\end{equation*}
+	is dense in $K$. We say that the system $(K;\varphi)$ is \emph{(topologically) transitive} if there is at least one transitive point.
+\end{definition}
+The following result shows that transitivity is a `mixing' property: two arbitrary open sets are mixed with each other under the action of $\varphi$ after finite time.
+
+\begin{proposition}
+	Let $(K;\varphi)$ be a topological system, and consider the following statements:
+	\begin{enumerate}[\upshape (i)]
+		\item $(K;\varphi)$ is forward transitive, i.e.\ $\mathrm{orb}_+(x)$ is dense in $K$ for some $x\in K$.
+		\item For all open sets $\emptyset\ne U, V$ in $K$, there exists $n\in\NN$ such that $\varphi^n(U)\cap V \ne \emptyset$.
+		\item For all open sets $\emptyset\ne U, V$ in $K$, there exists $n\in\NN$ such that $\varphi^{-n}(U)\cap V \ne \emptyset$.
+	\end{enumerate}
+	Then (ii) and (iii) are equivalent, (ii) implies (i) if $K$ is metrizable, and (i) implies (ii) if $K$ has no isolated points.
+\end{proposition}
+
+\begin{proof}
+	We show the equivalence of (ii) and (iii). Let $U,V$ be non-empty open subsets of $K$. If (ii) holds, then there exists $n\in\NN$ and $x\in K$ such that $x\in \varphi^n(V)\cap U$. This implies that there exists $y\in V$ such that $\varphi^n(y)=x$. However, since $x\in U$, we also have $y\in \varphi^{-n}(U)$, and thus $y\in\varphi^{-n}(U)\cap V$. Conversely, if (iii) holds, then there exists $x\in K$ and $n\in\NN$ with $x\in\varphi^{-n}(V)\cap U$. Then
+	\begin{equation*}
+		\varphi^n(x) \in \varphi^n(\varphi^{-n}(V)) \cap \varphi^n(U) \subseteq V\cap \varphi^n(U).
+	\end{equation*}
+	(i) $\Rightarrow$ (ii): Suppose $K$ has no isolated points, and let $U,V$ be non-empty open subsets of $K$. By assumption, there is $x\in K$ with a dense forward orbit, and thus $\varphi^k(x)\in U$ for some $k\in\NN_0$. Consider the open set $W:= V\setminus\{x, \varphi(x),\ldots,\varphi^k(x)\}$. Since $K$ has no isolated points, $W$ is non-empty, and thus $\varphi^m(x)\in W$ for some $m>k$. Then $\varphi^m(x)=\varphi^{m-k}(\varphi^k(x))\in \varphi^{m-k}(U)\cap V$.
+	
+	(iii) $\Rightarrow$ (i): If $K$ is metrizable, there exists a countable open base $\{U_n\}_{n\in\NN}$ for the topology induced by the metric. For each $n\in\NN$, consider the open set
+	\begin{equation*}
+		G_n := \bigcup_{k\in\NN_0} \varphi^{-k}(U_n).
+	\end{equation*}
+	By assumption (iii), $G_n$ intersects every non-empty open set non-trivially, and thus is dense in $K$. By the Baire category theorem (here, completeness is essential!), $\bigcap_{n\in\NN}G_n$ is a non-empty, open, dense set, and every $x$ in this intersection has a dense forward orbit.
+\end{proof}
+
 \subsection{Notes and exercises for chapter 3}
 
 A topological dynamical system is \emph{minimal} if there are no non-trivial, $\varphi$-invariant closed subsets. In other words, if $A \subseteq K$ is closed and invariant, then either $A=\emptyset$ or $A=K$.
@@ -250,6 +289,7 @@ for all $y\in Y$. Thus $y'=0$, showing that $T'$ is injective. Conversely, if $T
 		\item $\varphi$ is injective if and only if $T_\varphi$ is surjective.
 	\end{enumerate}
 \end{lemma}
+An immediate consequence of this lemma is that the spaces $K,L$ are homeomorphic if and only if the algebras $C(K),C(L)$ are isomorphic.
 
 \begin{proof}
 	Let us write $T := T_\varphi$.
@@ -286,3 +326,50 @@ for all $y\in Y$. Thus $y'=0$, showing that $T'$ is injective. Conversely, if $T
 	\end{itemize}
 	Thus we have verified all the properties of a contravariant functor.
 \end{remark}
+
+\begin{exercise}[Ex.\ 4.2]
+	Let $K=[0,1]$ and $\varphi(x)=x^2, x\in K$. Show that the system $(K;\varphi)$ is not topologically transitive, while the fixed space of the associated Koopman operator $T_\varphi$ is 1-dimensional. Determine the peripheral spectrum of $T_\varphi$.
+\end{exercise}
+
+\begin{proof}
+	We have $\varphi^n(x)=x^{2n}$. Clearly $\mathrm{orb}_+(0)=\{0\}$ and $\mathrm{orb}_+(1)=\{1\}$. If $x\in (0,1)$, then $x^{2n}\downarrow 0$ as $n\to\infty$, so $\overline{\mathrm{orb}_+(x)} \subseteq [0,x]$. Thus no point $x\in[0,1]$ has a dense orbit.
+	
+	We claim that $\mathrm{fix}(T_\varphi)=\mathrm{span}(\mathbf{1})$, i.e.\ the fixed space consists only of constant functions. It is obvious that each constant function is a fixed point of $T_\varphi$. If $f\in\mathrm{fix}(T)$, then observe that $(T^n f)(x)=f(x^{2n})=f(x)$ for every $n\in\NN$ and every $x\in [0,1]$. Fix $x \in (0,1)$ arbitrarily. Then by continuity, $f(x)=\lim_{n\to\infty}f(x^{2n})=f(0)$. Thus $f(x)=f(0)$ for all $x\in [0,1)$. Again by continuity of $f$, this extends to $x=1$ as well, and thus $f$ is constant on $[0,1]$.
+	
+	[\textcolor{red}{peripheral spectrum?}]
+\end{proof}
+
+\begin{exercise}[Ex.\ 4.7]
+	Let $A$ be a Banach algebra, and suppose $a,b\in A$ commute, i.e.\ $ab=ba$. Show that $\mathrm{r}(ab)\le \mathrm{r}(a)\mathrm{r}(b)$.
+\end{exercise}
+
+\begin{proof}
+	Since $ab=ba$, we have $(ab)^n = a^n b^n$ for all $n\in\NN$. Therefore
+	\begin{equation*}
+		\|(ab)^n\| = \|a^n b^n\| \le \|a^n\| \|b^n\|
+	\end{equation*}
+	using the sub-multiplicative property of the norm in a Banach algebra. Thus by the spectral radius formula, we conclude
+	\begin{equation*}
+		\mathrm{r}(ab) = \lim_{n\to\infty} \|(ab)^n\|^{1/n} \le \lim_{n\to\infty} \|a^n\|^{1/n} \|b^n\|^{1/n} = \mathrm{r}(a)\mathrm{r}(b)
+	\end{equation*}
+	as required.
+\end{proof}
+
+\begin{exercise}[Ex.\ 4.8]
+	Let $A$ be a commutative algebra and $\psi:A \to\CC$ a linear functional. Prove that $\psi$ is multiplicative if and only if $\psi(a^2)=\psi(a)^2$ holds for every $a\in A$.
+\end{exercise}
+
+\begin{proof}
+	If $\psi$ is multiplicative, then $\psi(a^2)=\psi(a)^2$ holds trivially. Conversely, suppose that $\psi(a^2)=\psi(a)^2$ holds for all $a\in A$. Observe that
+	\begin{equation*}
+		ab = \frac{1}{4}[(a+b)^2-(a-b)^2].
+	\end{equation*}
+	Thus, using the assumption and the linearity of $\psi$, we have
+	\begin{align*}
+		\psi(ab) &= \frac{1}{4}\psi((a+b)^2) - \frac{1}{4}\psi((a-b)^2) \\
+		&= \frac{1}{4}[\psi(a+b)^2-\psi(a-b)^2] \\
+		&= \frac{1}{4}[\psi(a+b)+\psi(a-b)][\psi(a+b)-\psi(a-b)] \\
+		&= \frac{1}{4}(2\psi(a))(2\psi(b)) = \psi(a)\psi(b),
+	\end{align*}
+	which shows that $\psi$ is multiplicative.
+\end{proof}
