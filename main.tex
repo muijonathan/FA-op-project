@@ -1,9 +1,56 @@
 \documentclass[11pt]{article}
-\input{preamble}
+
+%% Language and font encodings
+\usepackage[english]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{newtxtext}
+
+%% Sets page size and margins
+\usepackage[a4paper,top=3cm,bottom=3cm,left=3cm,right=3cm,marginparwidth=2cm]{geometry}
+
+%% Useful packages
+\usepackage{amsmath, amsthm, amssymb, mathrsfs}
+\usepackage{enumerate}
+\usepackage{braket}
+%\usepackage[colorinlistoftodos]{todonotes}
+\usepackage[colorlinks=true]{hyperref}
+\hypersetup{urlcolor=blue, linkcolor=blue, citecolor=red}
+
+\numberwithin{equation}{section}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}{Corollary}[theorem]
+
+\theoremstyle{definition}
+\newtheorem{exercise}{Exercise}[section]
+\newtheorem{definition}{Definition}[section]
+\newtheorem{example}[theorem]{Example}
+%\theoremstyle{remark}
+\newtheorem{remark}{Remark}[section]
+
+%%% Math operators
+\DeclareMathOperator{\dist}{dist}
+\DeclareMathOperator{\co}{co}
+\DeclareMathOperator{\rg}{rg}
+
+%%% Shortcuts
+\newcommand{\p}{\partial}
+\newcommand{\norm}[1]{\left\lVert #1 \right\rVert}
+
+\newcommand{\bo}[1]{\mathbf{#1}}
+
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\CC}{\mathbb{C}}
 
 \title{Functional analysis and operator theory}
 \author{Jonathan Mui}
-\date{last updated: 20 February 2022}
+\date{last updated: 16 April 2022}
 
 \begin{document}
 	
@@ -25,8 +72,7 @@
 	Main reference: Eisner et.al.\, \emph{Operator-theoretic aspects of ergodic theory}.
 	\input{eisner-etal-1.tex}
 	
-	\section{Measure-preserving transformations and ergodicity}
-	Main reference: Eisner et.al.\ \emph{Operator-theoretic aspects of ergodic theory}.
-	\input{eisner-etal-2.tex}
+	\section{Compact and Fredholm operators}
+	\input{compact-ops.tex}
 	
 \end{document}
